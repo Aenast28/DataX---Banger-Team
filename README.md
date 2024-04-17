@@ -16,3 +16,4 @@ Vytvoříte si novej branch. Jak na to? Tady máte malej tutoriálek.
 6. Good luck, borci.
 
 
+Ještě poslední věc. V "Issues" budeme mít naše úkoly. Tam si můžeme přiřazovat, kdo na čem zrovna pracuje. :)
