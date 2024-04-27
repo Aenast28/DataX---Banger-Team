@@ -8,7 +8,7 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     A POČET ZÁZNAMŮ MODELOVÉ POPULACE PODLE POTŘEBY (model_pop = model_pop.iloc[:1000])
     V ČÁSTI def create_features(merged_df) MŮŽETE KODIT CO POTŘEBUJETE PODLE INSTRUKCÍ 
     PO VŠECH ÚPRAVÁCH ZAVOLEJTE FUNKCI S JEJÍMI PARAMETRY - SEKCE 3
-
+    
     2)POPIS FUNKCE:
     Načte dva CSV soubory model_pop(calendar) a additional_info(listings, reviews), přejmenuje sloupec v additional_info dle potřeby, provede left join model_pop 
     (omezeného na prvních X záznamů pokud chcete) s additional_info na základě zadaného sloupce(zde listing_id)
@@ -29,6 +29,7 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
 
     # Provedení left join prvního datasetu s druhým datasetem
     merged_df = pd.merge(model_pop, additional_info, on='listing_id', how='left')
+    merged_df = merged_df.groupby('listing_id').sample(n=1)
 
     def create_features(merged_df):
          #reviews.groupby(['listing_id'])['sentiment_score'].mean().reset_index()
@@ -39,7 +40,6 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
          return merged_df
 
     features = create_features(merged_df)
-    features = features.groupby('listing_id').sample(n=1)
 
     # Uložení výsledného datasetu do CSV souboru
     features.to_csv(output_csv_path, index=False)
