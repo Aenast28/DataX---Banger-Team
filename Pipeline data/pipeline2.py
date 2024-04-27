@@ -28,7 +28,7 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     additional_info.rename(columns={'id': 'listing_id'}, inplace=True)
 
     # Provedení left join prvního datasetu s druhým datasetem
-    merged_df = pd.merge(additional_info, model_pop, on='listing_id', how='left')
+    merged_df = pd.merge(model_pop, additional_info, on='listing_id', how='left')
 
     def create_features(merged_df):
          #reviews.groupby(['listing_id'])['sentiment_score'].mean().reset_index()
