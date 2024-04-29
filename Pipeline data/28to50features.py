@@ -109,7 +109,6 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
         
         #Poslední merge
         merged_df=merged_df[["listing_id","neighbourhood_cleansed", "room_type","accommodates","bathrooms_numeric","beds", "bathrooms_shared", "amenities_num"]]
-        merged_df = pd.get_dummies(merged_df)
         return merged_df
 
     features = create_features(merged_df)
@@ -119,4 +118,4 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     
     print(f"Data byla úspěšně spojena a uložena do souboru {output_csv_path}")
 
-merge_datasets_and_save("Data/calendar.csv", "Data/listings.csv", "features-j.csv")
+merge_datasets_and_save("Data/calendar.csv", "Data/listings.csv", "features-j-2.csv")
