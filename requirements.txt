@@ -1,1 +1,22 @@
+catboost
+collections
+datetime
+folium
+geopy
+ggplot
+json
+langdetect
+matplotlib
+numpy 
+os
+pandas 
+plotnine
+re
+seaborn 
+sklearn
+transformers
+xgboost
+ydata-profiling
+
+
 
