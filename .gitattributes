@@ -1,2 +1,0 @@
-Data/calendar.csv filter=lfs diff=lfs merge=lfs -text
-Data/reviews.csv filter=lfs diff=lfs merge=lfs -text
