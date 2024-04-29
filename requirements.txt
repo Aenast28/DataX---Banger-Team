@@ -1,22 +1,22 @@
-catboost
+catboost==1.2.5
 collections
 datetime
 folium
 geopy
 ggplot
 json
-langdetect
-matplotlib
-numpy 
+langdetect==1.0.9
+matplotlib==3.8.2
+numpy==1.26.4
 os
-pandas 
+pandas==2.2.0
 plotnine
 re
 seaborn 
 sklearn
-transformers
-xgboost
-ydata-profiling
+transformers @ git+https://github.com/huggingface/transformers@c78f57729f6f76fbe47c54ead0908978ac44d1f4
+xgboost==2.0.3
+ydata-profiling==4.7.0
 
 
 
