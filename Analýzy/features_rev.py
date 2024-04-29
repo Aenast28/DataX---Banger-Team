@@ -22,13 +22,6 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     second_csv_path (str): Cesta k additional_info 
     output_csv_path (str): Cesta, kam se má výsledný CSV soubor uložit (features dataframe)
     """
-    # Načtení prvního datasetu a omezení na prvních X záznamů - X si volte jak chcete
-    model_pop = pd.read_csv(first_csv_path)
-    #model_pop = model_pop.iloc[:500]  
-
-    # Načtení druhého datasetu a přejmenování sloupce
-    additional_info = pd.read_csv(second_csv_path)
-    #additional_info.rename(columns={'id': 'listing_id'}, inplace=True)
 
     merged_df = pd.DataFrame()
 
@@ -36,10 +29,17 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
         # ZDE MŮŽETE PROVÁDĚT CO CHCETE SE SVÝMI DATY
         # HLAVNĚ NECHTE NÁZEV VÝSLEDNÉHO DATAFRAME JAKO merged_df, ABY SE KOD NEMUSEL MĚNIT A PROBĚHL TAK, JAK JE NYNÍ
         #drop 23 rows with NA comment values
+            # Načtení prvního datasetu a omezení na prvních X záznamů - X si volte jak chcete
+        model_pop = pd.read_csv(first_csv_path)  
+
+        # Načtení druhého datasetu a přejmenování sloupce
+        additional_info = pd.read_csv(second_csv_path)
+        #additional_info = additional_info.iloc[:500]
+
         reviews = additional_info
         reviews_cleaned = reviews.dropna(subset=['comments'])
 
-        sentiment_df = reviews_cleaned[['listing_id', 'comments']].sample(n=100, random_state=1)
+        sentiment_df = reviews_cleaned[['listing_id', 'comments']]
 
         sentiment = sentiment_df['comments'].tolist()
 
@@ -80,7 +80,9 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
         sentiment_df['sentiment_score'] = sentiment_scores
 
         additional_info = sentiment_df.groupby(['listing_id'])['sentiment_score'].mean().reset_index()
-            
+
+        model_pop = model_pop.drop(['date', 'available', 'price', 'adjusted_price', 'minimum_nights', 'maximum_nights'], axis=1)    
+        
         # Provedení left join prvního datasetu s druhým datasetem
         merged_df = pd.merge(model_pop, additional_info, on='listing_id', how='left')
         merged_df = merged_df.groupby('listing_id').sample(n=1)
@@ -94,4 +96,4 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     
     print(f"Data byla úspěšně spojena a uložena do souboru {output_csv_path}")
 
-merge_datasets_and_save("DataX---Banger-Team\\Data\\calendar.csv", "DataX---Banger-Team\\Data\\reviews.csv", "DataX---Banger-Team\\Data\\features_cal_rev.csv")
+merge_datasets_and_save("C:\\Users\\scott\\Downloads\\airbnb\\DataX---Banger-Team\\Data\\calendar.csv", "C:\\Users\\scott\\Downloads\\airbnb\\DataX---Banger-Team\\Data\\reviews.csv", "C:\\Users\\scott\\Downloads\\airbnb\\DataX---Banger-Team\\Data\\features_cal_rev.csv")
