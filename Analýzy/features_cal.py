@@ -22,20 +22,20 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     second_csv_path (str): Cesta k additional_info 
     output_csv_path (str): Cesta, kam se má výsledný CSV soubor uložit (features dataframe)
     """
-    # Načtení prvního datasetu a omezení na prvních X záznamů - X si volte jak chcete
-    model_pop = pd.read_csv(first_csv_path)
-    #model_pop = model_pop.iloc[:500]  
-
-    # Načtení druhého datasetu a přejmenování sloupce
-    additional_info = pd.read_csv(second_csv_path)
-    #additional_info.rename(columns={'id': 'listing_id'}, inplace=True)
 
     merged_df = pd.DataFrame()
 
     def create_features(merged_df):
         # ZDE MŮŽETE PROVÁDĚT CO CHCETE SE SVÝMI DATY
         # HLAVNĚ NECHTE NÁZEV VÝSLEDNÉHO DATAFRAME JAKO merged_df, ABY SE KOD NEMUSEL MĚNIT A PROBĚHL TAK, JAK JE NYNÍ
-        
+            # Načtení prvního datasetu a omezení na prvních X záznamů - X si volte jak chcete
+        model_pop = pd.read_csv(first_csv_path)
+        #model_pop = model_pop.iloc[:500]  
+
+        # Načtení druhého datasetu a přejmenování sloupce
+        additional_info = pd.read_csv(second_csv_path)
+        #additional_info.rename(columns={'id': 'listing_id'}, inplace=True)
+
         ### CALENDAR STATIC ###
 
         calendar_new = additional_info[['listing_id', 'available']]
@@ -70,7 +70,7 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
         merged_df = merged_df.groupby('listing_id').sample(n=1)
         
         return merged_df
-
+    
     features = create_features(merged_df)
 
     # Uložení výsledného datasetu do CSV souboru
@@ -78,4 +78,4 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     
     print(f"Data byla úspěšně spojena a uložena do souboru {output_csv_path}")
 
-merge_datasets_and_save("DataX---Banger-Team\\Data\\calendar.csv", "DataX---Banger-Team\\Data\\calendar.csv", "DataX---Banger-Team\\Data\\features_cal_cal.csv")
+merge_datasets_and_save("C:\\Users\\scott\\Downloads\\airbnb\\DataX---Banger-Team\\Data\\calendar.csv", "C:\\Users\\scott\\Downloads\\airbnb\\DataX---Banger-Team\\Data\\calendar.csv", "C:\\Users\\scott\\Downloads\\airbnb\\DataX---Banger-Team\\Data\\features_cal_cal.csv")
