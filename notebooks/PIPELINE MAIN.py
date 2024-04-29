@@ -46,4 +46,4 @@ def merge_datasets_and_save(first_csv_path, second_csv_path, output_csv_path):
     
     print(f"Data byla úspěšně spojena a uložena do souboru {output_csv_path}")
 
-merge_datasets_and_save("DataX---Banger-Team\\Data\\calendar.csv", "DataX---Banger-Team\\Data\\listings.csv", "DataX---Banger-Team\\Data\\features.csv")
+merge_datasets_and_save("Data\\raw\\calendar.csv", "Data\\raw\\listings.csv", "Data\\raw\\features.csv")
